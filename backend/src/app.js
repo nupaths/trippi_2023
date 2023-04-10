@@ -20,20 +20,21 @@ mongoose.connect(mongoUrl, {
   .catch(err => console.log(`Error in DB connection ${err}`));
 
 const ORIGINS_WHITELIST = [
-  'http://localhost:3000',
-  'http://0.0.0.0:3000',
+  'http://localhost:*',
+  'http://0.0.0.0:*',
   'http://localhost',
-  'http://0.0.0.0:8080',
-  'http://localhost:8080'
+  'http://0.0.0.0:*',
+  'http://localhost:*'
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || ORIGINS_WHITELIST.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Origin not allowed by CORS policy'));
-    }
+    callback(null, true);
+    // if (!origin || ORIGINS_WHITELIST.includes(origin)) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error('Origin not allowed by CORS policy'));
+    // }
   }, 
   credentials: true,
   optionSuccessStatus: 200,
